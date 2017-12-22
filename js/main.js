@@ -27,6 +27,7 @@ var makeBtns = angular.module("makeBtns", []);
 
 		angular.element(document).ready(function () {
 			$scope.resetAll();
+			console.log("window onload");
 		});
 
 		$scope.enterNums = function(btnObj){
@@ -131,6 +132,7 @@ var makeBtns = angular.module("makeBtns", []);
 
 		$scope.resetAll = function(){
 			$scope.btnColl[0].val = "0";
+			$scope.value = [];
 			$scope.input = "";
 			$scope.operation = "";
 			$scope.inputCounter = 0;
