@@ -1,0 +1,29 @@
+.container{
+	display: grid;
+	grid-template: repeat(6, 1fr) / repeat(4, 1fr); 
+	grid-gap: 5px 5px;
+	max-width: 300px;
+	position: relative;
+	margin: 20px auto;
+	padding: 5px;
+	text-align: center;
+	border: 1px solid purple;
+}
+div{
+	border-radius: 5px;
+}
+.item{
+	background: lightgrey;
+	padding: 5px;
+}
+.item:hover{
+	background: purple;
+	cursor: pointer;
+}
+.item-a{
+	grid-column: 1 / span 4;
+	border: 1px solid purple;
+	text-align: right;
+	padding: 5px 10px;
+	height: 20px;
+}
