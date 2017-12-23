@@ -2,28 +2,29 @@
 	display: grid;
 	grid-template: repeat(6, 1fr) / repeat(4, 1fr); 
 	grid-gap: 5px 5px;
-	max-width: 300px;
-	position: relative;
-	margin: 20px auto;
 	padding: 5px;
-	text-align: center;
-	border: 1px solid purple;
 }
 div{
 	border-radius: 5px;
+	border: 1px solid purple;
 }
 .item{
 	background: lightgrey;
-	padding: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
 .item:hover{
 	background: purple;
 	cursor: pointer;
 }
+p{
+	margin: 0px;
+}
 .item-a{
 	grid-column: 1 / span 4;
-	border: 1px solid purple;
-	text-align: right;
-	padding: 5px 10px;
-	height: 20px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-right: 10px;
 }

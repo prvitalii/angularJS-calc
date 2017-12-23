@@ -29,6 +29,20 @@ var makeBtns = angular.module("makeBtns", []);
 			$scope.resetAll();
 			console.log("window onload");
 		});
+		/*$(window).resize(function() {
+		    $scope.$apply(function() {
+		        $scope.windowWidth = $( window ).width();
+		        $scope.windowHeight = $( window ).height();
+		        console.log($scope.windowWidth + " X " + $scope.windowHeight);
+		    });
+	    });*/
+
+		$scope.hgt = { height: ($( window ).height()-40) + 'px' };
+		$scope.windowH = ($( window ).height());
+		$scope.respText = $scope.windowH/15 + "px";
+	    $scope.textSize = {
+	    	"font-size": $scope.respText
+	    };
 
 		$scope.enterNums = function(btnObj){
 			if(!$scope.offSwitch || btnObj.val == "ce"){
@@ -66,9 +80,6 @@ var makeBtns = angular.module("makeBtns", []);
 				case "/":
 					$scope.checkInputCounterFunc($scope.devide);
 					$scope.operation = "/";
-					console.log($scope.btnColl[0].val + " input " + $scope.input +
-				" operation "+ $scope.operation + " ipntCounter " + $scope.inputCounter +
-				" result " + $scope.result + " nextVal " + $scope.nextValue);
 					break;
 				case "*":
 					$scope.checkInputCounterFunc($scope.multiply);
@@ -84,9 +95,6 @@ var makeBtns = angular.module("makeBtns", []);
 					break;
 				case "=":
 					$scope.equalBtnFunc();
-					console.log($scope.btnColl[0].val + " input " + $scope.input +
-				" operation "+ $scope.operation + " ipntCounter " + $scope.inputCounter +
-				" result " + $scope.result + " nextVal " + $scope.nextValue);
 					break;
 				default: 
 					console.log(btnVal);
