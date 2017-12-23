@@ -31,18 +31,21 @@ var makeBtns = angular.module("makeBtns", []);
 		});
 		/*$(window).resize(function() {
 		    $scope.$apply(function() {
-		        $scope.windowWidth = $( window ).width();
-		        $scope.windowHeight = $( window ).height();
-		        console.log($scope.windowWidth + " X " + $scope.windowHeight);
+		        // console.log($scope.windowW + " X " + $scope.windowH);
 		    });
 	    });*/
 
-		$scope.hgt = { height: ($( window ).height()-40) + 'px' };
-		$scope.windowH = ($( window ).height());
-		$scope.respText = $scope.windowH/15 + "px";
+        $scope.windowH = ($( window ).height());
+		$scope.windowW = ($( window ).width());
 	    $scope.textSize = {
-	    	"font-size": $scope.respText
+	    	"font-size": ($scope.windowH/15)
 	    };
+		if ($scope.windowW < 1000){
+			$scope.hgt = {
+				height: ($scope.windowH-40),
+				width: ($scope.windowW-40)
+			};
+		};
 
 		$scope.enterNums = function(btnObj){
 			if(!$scope.offSwitch || btnObj.val == "ce"){
