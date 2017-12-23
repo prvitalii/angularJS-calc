@@ -29,6 +29,7 @@ var makeBtns = angular.module("makeBtns", []);
 			$scope.resetAll();
 			console.log("window onload");
 		});
+
 		/*$(window).resize(function() {
 		    $scope.$apply(function() {
 		        // console.log($scope.windowW + " X " + $scope.windowH);
@@ -53,17 +54,35 @@ var makeBtns = angular.module("makeBtns", []);
 					case "nums":
 						$scope.value.push(btnObj.val);
 						if($scope.value[0] == "."){
-							$scope.value[0]=0;
+							$scope.value[0]= 0;
 							$scope.value[1]= ".";					
 						};
 						$scope.input = parseFloat($scope.value.join(""));
 						$scope.btnColl[0].val = $scope.input;
-						break;
+					break;
 					case "logic":
 						$scope.logicBtnFunc(btnObj.val);
-						break;
+					break;
 				};
 			};
+		};
+
+		$scope.checkInputCounterFunc = function(callback){
+			$scope.inputCounter++;
+			if($scope.inputCounter <= 1){
+				$scope.result = $scope.input; 
+				$scope.resetInput();
+			}else{
+				$scope.enterNums($scope.btnColl);
+				if($scope.value.length){
+					$scope.nextValue = $scope.input; 
+					if(typeof callback == "function"){
+						callback($scope.result);
+					};
+				$scope.btnColl[0].val = $scope.result; 
+				};
+				$scope.resetInput();
+			}
 		};
 
 		$scope.logicBtnFunc = function(btnVal){
@@ -95,30 +114,22 @@ var makeBtns = angular.module("makeBtns", []);
 				case "+":
 					$scope.checkInputCounterFunc($scope.add);
 					$scope.operation = "+";
+				console.log("input " + $scope.input);
+				console.log("next " + $scope.nextValue);
+				console.log("result " + $scope.result);
 					break;
 				case "=":
 					$scope.equalBtnFunc();
+					$scope.operation = "=";
+					console.log($scope.operation);
 					break;
 				default: 
 					console.log(btnVal);
 			}
 		};
 
-		$scope.checkInputCounterFunc = function(callback){
-			$scope.inputCounter++;
-			if($scope.inputCounter <= 1){
-				$scope.result = $scope.input; 
-				$scope.resetInput();
-			}else{
-				$scope.nextValue = $scope.input; 
-				if(typeof callback == "function"){
-					callback($scope.result);
-				};
-				$scope.resetInput();
-				$scope.btnColl[0].val = $scope.result; 
-			}
-		};
 		$scope.equalBtnFunc = function(){
+				console.log("next " + $scope.nextValue);
 			switch($scope.operation){
 				case "/":
 					$scope.checkInputCounterFunc($scope.devide);
@@ -153,7 +164,7 @@ var makeBtns = angular.module("makeBtns", []);
 		}
 
 		$scope.resetInput = function(){
-			$scope.btnColl[0].val = "0";
+			$scope.input = 0;
 			$scope.value = [];
 			$scope.offSwitch = false;
 		};
@@ -178,27 +189,23 @@ var makeBtns = angular.module("makeBtns", []);
 			$scope.btnColl[0].val = $scope.result; 
 		};
 
-		$scope.devide = function(result){
-			result /= $scope.nextValue;
-			$scope.input = 1;
-			return $scope.result = result;
-		};
-
-		$scope.multiply = function(result){
-			result *= $scope.nextValue;
-			$scope.input = 1;
+		$scope.add = function(result){
+			result += $scope.nextValue;
 			return $scope.result = result;
 		};
 
 		$scope.substract = function(result){
 			result -= $scope.nextValue;
-			$scope.input = 0;
 			return $scope.result = result;
 		};
 
-		$scope.add = function(result){
-			result += $scope.nextValue;
-			$scope.input = 0;
+		$scope.multiply = function(result){
+			result *= $scope.nextValue;
+			return $scope.result = result;
+		};
+
+		$scope.devide = function(result){
+			result /= $scope.nextValue;
 			return $scope.result = result;
 		};
 });
